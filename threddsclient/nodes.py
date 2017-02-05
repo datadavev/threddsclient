@@ -186,6 +186,9 @@ class DirectDataset(Dataset):
     def wms_url(self):
         return self.access_url(WMS_SERVICE)
     
+    def wcs_url(self):
+        return self.access_url(WCS_SERVICE)
+    
     def ncss_url(self):
         return self.access_url(NCSS_SERVICE)
 
