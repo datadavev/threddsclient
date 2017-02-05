@@ -185,6 +185,9 @@ class DirectDataset(Dataset):
 
     def wms_url(self):
         return self.access_url(WMS_SERVICE)
+    
+    def ncss_url(self):
+        return self.access_url(NCSS_SERVICE)
 
     @staticmethod
     def _modified(soup):
