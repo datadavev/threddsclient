@@ -77,7 +77,7 @@ def skip_pattern(skip=None):
     import re
     if skip is None:
         skip = SKIPS
-    skip = map(lambda x: re.compile(x), skip)
+    skip = [re.compile(x) for x in skip]
     return skip
 
 

@@ -1,4 +1,4 @@
-import urlparse
+import urllib.parse
 
 def fix_catalog_url(url):
     """
@@ -6,23 +6,23 @@ def fix_catalog_url(url):
     """
     from os.path import splitext, join
 
-    u = urlparse.urlsplit(url)
+    u = urllib.parse.urlsplit(url)
     name, ext = splitext(u.path)
     if ext == ".html":
-        u = urlparse.urlsplit(url.replace(".html", ".xml"))
+        u = urllib.parse.urlsplit(url.replace(".html", ".xml"))
     elif ext == '':
-        u = urlparse.urlsplit(join(url, "catalog.xml"))
+        u = urllib.parse.urlsplit(join(url, "catalog.xml"))
     return u.geturl()
 
 
 def construct_url(url, href):
-    u = urlparse.urlsplit(url)
+    u = urllib.parse.urlsplit(url)
     base_url = u.scheme + "://" + u.netloc
-    relative_path = urlparse.urljoin(base_url,os.path.split(u.path)[0])
+    relative_path = urllib.parse.urljoin(base_url,os.path.split(u.path)[0])
 
     if href[0] == "/":
         # Absolute paths
-        cat = urlparse.urljoin(base_url, href)
+        cat = urllib.parse.urljoin(base_url, href)
     elif href[0:4] == "http":
         # Full HTTP links
         cat = href

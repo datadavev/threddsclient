@@ -3,7 +3,7 @@ Python objects for modelling a Thredds server
 """
 
 from bs4 import BeautifulSoup as BSoup
-import urlparse
+import urllib.parse
 from .utils import size_in_bytes
 
 import logging
@@ -42,7 +42,7 @@ class Service(Node):
     def __init__(self, soup, catalog):
         Node.__init__(self, soup, catalog)
         self.base = soup.get('base')
-        self.url = urlparse.urljoin(self.catalog.url, self.base)
+        self.url = urllib.parse.urljoin(self.catalog.url, self.base)
         self.service_type = soup.get('serviceType')
         self.content_type = "application/service"
         self.services = [Service(s, self.catalog) for s in soup.find_all('service', recursive=False)]
@@ -57,7 +57,7 @@ class CatalogRef(Node):
         self.title = soup.get('xlink:title')
         self.name = self.title
         self.href = soup.get('xlink:href')
-        self.url = urlparse.urljoin(self.catalog.url, self.href)
+        self.url = urllib.parse.urljoin(self.catalog.url, self.href)
         self.content_type = "application/directory"
 
     def follow(self):
@@ -173,7 +173,7 @@ class DirectDataset(Dataset):
         url = None
         for service in self.catalog.get_services(self.service_name):
             if service.service_type == service_type:
-                url = urlparse.urljoin(service.url, self.url_path)
+                url = urllib.parse.urljoin(service.url, self.url_path)
                 break
         return url
 
