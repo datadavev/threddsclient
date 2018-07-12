@@ -2,6 +2,12 @@
 Thredds Client for Python
 =========================
 
+Forked from https://github.com/adamsteer/threddsclient to update for Python 3.
+
+Install from source only for now.
+
+
+
 |Travis Build| |Install with Conda|
 
 Installing Thredds Client
